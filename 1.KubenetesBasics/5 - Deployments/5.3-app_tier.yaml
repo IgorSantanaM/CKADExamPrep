@@ -1,0 +1,41 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  app-tier
+  labels:
+    app:  microservices
+spec:
+  ports:
+    - port:  80
+  selector:
+    tier:  app
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-tier
+  labels:
+    app: microservices
+    tier: apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: apps
+  template:
+    metadata:
+      labels:
+        app: microservices
+        tier: apps
+    spec:
+      containers:
+      - name: app
+        image: lrakai/microservices:server-v1
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8080
+        env:
+        - name: REDIS_URL
+          value: "redis://$(DATA_TIER_SERVICE_HOST):$(DATA_TIER_SERVICE_PORT_REDIS)"
