@@ -1,0 +1,15 @@
+apiVersion: autoscalling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: app-tier
+  labels:
+    app: microservices
+    tier: app
+spec:
+  maxReplicas: 5
+  minReplicas: 1
+  scaletargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: app-tier
+  targetCPUUtilizationPercentage: 50
