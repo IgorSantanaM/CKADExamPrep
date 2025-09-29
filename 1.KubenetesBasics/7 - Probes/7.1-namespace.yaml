@@ -1,9 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-<<<<<<< HEAD
-  name:  probes
-=======
   name: probes
- 
->>>>>>> d19fd121e3fdefeddbf8516ead241b06a55bf11a
