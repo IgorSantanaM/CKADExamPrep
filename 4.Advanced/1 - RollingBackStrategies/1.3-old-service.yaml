@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: web
+  name: app
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web # This should match the label in the deployment
+    version: old # Change to "new" to point to the new deployment
+  type: LoadBalancer

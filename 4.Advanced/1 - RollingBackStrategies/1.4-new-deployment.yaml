@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+    version: new
+  name: app-new
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: web
+      version: new
+  template:
+    metadata:
+      labels:
+        app: web
+        version: new
+    spec:
+      containers:
+      - image: httpd:2.4.49-alpine3.14
+        name: httpd
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          failureThreshold: 3 
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          periodSeconds: 5
+          successThreshold: 2
+          timeoutSeconds: 10
