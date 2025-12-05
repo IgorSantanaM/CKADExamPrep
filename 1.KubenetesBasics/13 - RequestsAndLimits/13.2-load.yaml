@@ -11,4 +11,5 @@ spec:
     - "2"
     resources:
       requests:
-        cpu: "1.7" # 170% of a core
+        cpu: "200m" # 200 milliCPU
+        memory: "256Mi" # 256 MiB
